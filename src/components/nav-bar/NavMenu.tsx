@@ -5,7 +5,7 @@ import React, { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import BurgerToggle from "./BurgerToggle";
-import { ArrowRight } from 'lucide-react';
+import Button from "../Button";
 
 
 const NavMenu = () => {
@@ -57,8 +57,8 @@ const NavMenu = () => {
   const toggleMobileMenu = () => setMobileMenuOpen(prev => !prev);
 
   const menuLinks = [
-    { name: "Home", href: "/" },
     { name: "About", href: "/about" },
+    { name: "Features", href: "/features" },
     { name: "Products", href: "/products" },
     { name: "Contact", href: "/contact" },
   ];
@@ -70,14 +70,14 @@ const NavMenu = () => {
       <div
         className={`px-6 lg:px-0 fixed top-0 z-50 w-full transform transition-transform duration-300 ${
           showNav ? "translate-y-0" : "-translate-y-full"
-        } ${lastScrollY > 50 ? "backdrop-blur-2xl shadow-md bg-black/25" : "bg-transparent"}`}
+        } ${lastScrollY > 50 ? "backdrop-blur-2xl shadow-md bg-white" : "bg-transparent"}`}
       >
 
         <div className="max-w-7xl mx-auto py-4 flex justify-between items-center ">
           {/* Logo */}
           <Link href="/">
           <Image
-              src="/neonLogoTransparent.png"
+              src="/sonicLogo.svg"
               width={56}
               height={56}
               alt="Barber Logo"
@@ -85,45 +85,28 @@ const NavMenu = () => {
             />
           </Link>
 
-          <ul className="hidden md:flex space-x-8 text-lg font-normal tracking-wider backdrop-blur-lg border border-[var(--primary)] rounded-full px-7 py-2 h-full">
+        <ul className="hidden md:flex space-x-6 text-sm font-bold tracking-wider uppercase">
           {menuLinks.map((link) => (
-            <li key={link.href} className="relative overflow-hidden">
-              <Link
-                href={link.href}
-                className="group relative inline-block px-4 py-2 z-10 text-white"
-              >
-                <span className="relative z-20">{link.name}</span>
-
-                {/* Hover Background */}
-                <span
-                  className="absolute inset-0 z-0 scale-x-0 origin-bottom bg-[var(--primary)] transition-transform duration-300 ease-out group-hover:scale-x-100 rounded-full"
-                />
-              </Link>
+            <li key={link.href}>
+            <Link
+              href={link.href}
+              className="group relative inline-block text-black/70 transition-colors duration-200"
+            >
+              <span className="absolute bottom-0 left-1/2 w-0 h-[2px] bg-black/70 transition-all duration-300 group-hover:w-full group-hover:-translate-x-1/2" />
+              <span className="absolute bottom-0 right-1/2 w-0 h-[2px] bg-black/70 transition-all duration-300 group-hover:w-full group-hover:translate-x-1/2" />
+              {link.name}
+            </Link>
             </li>
           ))}
-          </ul>
+        </ul>
+
 
 
         {/* Log In Buttons */}
         <ul className="hidden md:flex space-x-6  tracking-wider uppercase">
             <li>
-              <Link
-                href='/'
-                className="flex bg-transparent border border-[var(--primary)]  text-white px-7 py-2 items-center rounded-full hover:bg-[var(--primary)] hover:text-black transition h-full"
-                  >
-                    Log In
-              </Link>
+           <Button text="Buy now" variant="secondary" href="/platform" />
             </li>
-            <li>
-            <Link
-              href="/"
-              className="group flex items-center gap-2 px-4 py-2 text-black bg-[var(--primary)] border border-[var(--primary)] rounded-full transition-colors duration-200 hover:bg-transparent hover:text-white h-full"
-            >
-              Sign Up
-              <ArrowRight size={30} className="text-black group-hover:text-white group-hover:border-white transition border border-black rounded-full p-1" />
-            </Link>
-          </li>
-
         </ul>
 
           {/* Mobile Menu Icon */}

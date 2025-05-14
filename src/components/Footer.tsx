@@ -11,16 +11,7 @@ const Footer = () => {
         
         {/* Left Column */}
         <div className="md:col-span-2">
-           {/* Logo */}
-           <Link href="/">
-            <Image
-                src="/neonLogoTransparent.png"
-                width={100}
-                height={100}
-                alt="Barber Logo"
-                className="transition-transform hover:shadow-none hover:text-white hover:border-white scale-105 mb-4"
-                />
-          </Link>
+         
           <p className="text-lg max-w-sm text-gray-400 mb-6">
             Building powerful web experiences with precision, creativity, and performance in mind.
           </p>

@@ -13,20 +13,20 @@
   --innerVh: 7.03px;
 
   /* Fonts */
-  --main: "Sora", sans-serif; /* AI-style clean and futuristic */
+  --main: "Sora", sans-serif;
   --secondary: "Inter", sans-serif;
 
   /* Scrollbar Thumb */
-  --scroll-thumb: #7eee64;
+  --scroll-thumb: #555;
 
-  /* Modern Dark Theme Colors */
-  --primary: #7eee64; /* Neon Green */
+  /* Monochrome Modern Theme Colors */
+  --primary: #d1d1d1; /* Light Grey for primary elements */
   --secondary: #ffffff; /* Pure White */
-  --accent: #48d39e; /* Optional mint/teal highlight */
-  --background: #0a0a0a; /* Rich Black */
-  --text: #ffffff; /* Clean White Text */
-  --border: #2a2a2a; /* Soft Grey Border */
-  --highlight: #7eee64; /* Same as Primary for highlighting */
+  --accent: #888888; /* Mid Grey Accent */
+  --background: #0a0a0a; /* Deep Black Background */
+  --text: #f5f5f5; /* Almost White Text */
+  --border: #2a2a2a; /* Dark Grey Border */
+  --highlight: #d1d1d1; /* Match Primary for highlights */
 }
 
 /* Normalize + Antialias */
@@ -49,7 +49,7 @@
 /* Font Application */
 body {
   font-family: var(--secondary);
-  background-color: #000;
+  background-color: #fff;
   color: var(--text);
   height: 100%;
   position: relative;
@@ -84,7 +84,7 @@ h6 {
   color: var(--primary);
 }
 
-/* globals.css */
+/* Scrollbar Hiding Utility */
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }

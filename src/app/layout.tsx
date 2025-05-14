@@ -2,6 +2,7 @@ import NavMenu from '@/components/nav-bar/NavMenu'
 import './globals.css'
 import { Sora, Inter } from 'next/font/google'
 import Footer from '@/components/Footer'
+import ScrollBlur from '@/components/ScrollBlur'
 
 
 const sora = Sora({ subsets: ['latin'], weight: ['400', '700'] })
@@ -23,6 +24,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <NavMenu />
         {children}
         <Footer />
+        <ScrollBlur />
       </body>
     </html>
   )
