@@ -1,26 +1,168 @@
-@import "tailwindcss";
+/* Import Tailwind's default base, components, and utilities */
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
+/* Custom Variables */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --left-right-margin: 240px;
+  --left-right-internal-margin: 24px;
+  --top-margin: 240px;
+  --top-margin-mobile: 40vh;
+  --top-internal-margin: 24px;
+  --innerVh: 7.03px;
+
+  /* Fonts */
+  --main: "Sora", sans-serif; /* AI-style clean and futuristic */
+  --secondary: "Inter", sans-serif;
+
+  /* Scrollbar Thumb */
+  --scroll-thumb: #7eee64;
+
+  /* Modern Dark Theme Colors */
+  --primary: #7eee64; /* Neon Green */
+  --secondary: #ffffff; /* Pure White */
+  --accent: #48d39e; /* Optional mint/teal highlight */
+  --background: #0a0a0a; /* Rich Black */
+  --text: #ffffff; /* Clean White Text */
+  --border: #2a2a2a; /* Soft Grey Border */
+  --highlight: #7eee64; /* Same as Primary for highlighting */
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* Normalize + Antialias */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Font Application */
+body {
+  font-family: var(--secondary);
+  background-color: #000;
+  color: var(--text);
+  height: 100%;
+  position: relative;
+}
+
+/* Scrollbar (WebKit) */
+body::-webkit-scrollbar {
+  width: 0.5rem;
+}
+body::-webkit-scrollbar-thumb {
+  background-color: var(--scroll-thumb);
+}
+
+/* Text + Links */
+a,
+p,
+ul li {
+  text-decoration: none;
+  font-size: 14px;
+  font-family: var(--secondary);
+  color: var(--text);
+}
+
+/* Headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--main);
+  color: var(--primary);
+}
+
+/* globals.css */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Container */
+.container-global {
+  @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
+}
+
+/* Hero Section Typography */
+.page-content h1 {
+  @apply absolute text-[5vw] font-normal tracking-tight;
+  font-family: var(--main);
+  color: var(--primary);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+h1 sup {
+  position: relative;
+  top: -20px;
+  left: 10px;
+  font-size: 1.5vw;
+  letter-spacing: 0;
+  color: var(--accent);
+}
+
+@media (max-width: 900px) {
+  .page-content h1 {
+    font-size: 10vw;
+  }
+
+  h1 sup {
+    font-size: 4vw;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Layout Utility */
+.page-content {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Utility Classes for Theme Colors */
+.bg-primary {
+  background-color: var(--primary);
+}
+.bg-secondary {
+  background-color: var(--secondary);
+}
+.bg-accent {
+  background-color: var(--accent);
+}
+.bg-background {
+  background-color: var(--background);
+}
+
+.text-primary {
+  color: var(--primary);
+}
+.text-secondary {
+  color: var(--secondary);
+}
+.text-accent {
+  color: var(--accent);
+}
+.text-highlight {
+  color: var(--highlight);
+}
+.text-default {
+  color: var(--text);
+}
+
+.border-default {
+  border-color: var(--border);
 }
