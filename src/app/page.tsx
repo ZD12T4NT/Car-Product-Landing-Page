@@ -8,6 +8,8 @@ import Accordion from '@/components/Accordion';
 import SplitTextAndImage from '@/components/SplitTextAndImage';
 import TextOverlaySection from '@/components/TextOverlaySection';
 import StickyImage from '@/components/StickyImage';
+import BlogSection from '@/components/BlogSection';
+import { Airplay, AudioLines, Diamond, Paperclip, Speaker } from 'lucide-react';
 
 const accordionItems = [
   {
@@ -36,20 +38,52 @@ export default function SonicLandingPage() {
 
       <TextOverlaySection />
 
-      <SplitTextAndImage />
+      <SplitTextAndImage
+      imageSrc="/speakerTwo.jpeg"
+      imageAlt="Speaker Image"
+      pretitle="The Perfect Sound,"
+      pretitleIcon={<AudioLines />}
+      title="Experience crystal-clear audio with deep bass and immersive sound."
+      description="Our smart speaker is designed to fill your space with rich, high-fidelity sound—whether you're at home or on the go."
+      buttonText="Buy now"
+      buttonHref="/"
+      reverse={false}
+      />
 
-      <SplitTextAndImage />
+      <SplitTextAndImage
+      imageSrc="/speakerThree.png"
+      imageAlt="Speaker Image"
+      pretitle="Smart. Sleek. Powerful.,"
+      pretitleIcon={<Speaker />}
+      title="Seamless connectivity, voice control, and a sleek, modern design make this speaker the perfect addition to any room."
+      description="Designed for modern living, this speaker blends premium sound with intuitive controls. ."
+      buttonText="Buy now"
+      buttonHref="/"
+      reverse={true}
+      />
 
-      <SplitSection />
-
-      <ImageFadeCarousel />
-
-      <AiSplitSection />
+      <SplitSection 
+        pretitle="Why Us?"
+        icon={<Diamond/>}
+        title="Trusted by Thousands, Engineered for Excellence"
+        description="Our commitment to innovation and quality has earned the trust of customers worldwide. Sleek design, our products are built to impress."/>
 
       <CardGrid />
 
+      <SplitSection 
+        pretitle="In Reality"
+        icon={<Airplay/>}
+        title="Timeless Elegance"
+        description="Our platform delivers the tools you need to ship production-ready software with speed, precision, and style."/>
+
+      <ImageFadeCarousel />
+
       <Accordion items={accordionItems} />
-    
+
+      <BlogSection />
+
+      <AiSplitSection />
+
     </main>
   );
 }

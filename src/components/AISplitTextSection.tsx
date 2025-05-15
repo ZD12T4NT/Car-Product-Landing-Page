@@ -1,50 +1,50 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { ChevronRight } from 'lucide-react';
 
 export default function AiSplitSection() {
   return (
-    <section className="max-w-7xl mx-auto w-full px-6 py-16 bg-[#0A0A0A] text-white flex flex-col md:flex-row items-end justify-between gap-10 lg:px-0">
+    <section className=" bg-white text-black relative z-10 ">
+
+      <div className="max-w-7xl mx-auto w-full px-6  py-16 flex justify-between flex-col md:flex-row md:gap-10 lg:gap-36 xl:gap-48">
       {/* Left Content */}
       <motion.div
-        className="md:w-[75%]"
+        className="md:w-1/2"
         initial={{ opacity: 0, x: -50 }}
         whileInView={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true, amount: 0.3 }}
       >
-        {/* Pretitle */}
-        <motion.span
-          className="text-sm tracking-widest text-[var(--primary)] uppercase mb-2 inline-block border border-[var(--primary)] px-6 py-3 rounded-full bg-black/30"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ delay: 0.2, duration: 0.6 }}
-          viewport={{ once: true }}
-        >
-          AI Powered Precision
-        </motion.span>
 
-        <h2 className="text-4xl lg:text-7xl font-normal leading-tight text-white">
-          <span className="font-light text-[var(--primary)] italic">Batch Processing</span> Optimised for High-Volume Workloads
+        <h2 className="text-4xl lg:text-6xl font-normal leading-tight text-black relative z-10">
+          Get your perfect speaker now!
         </h2>
+          <button className="my-6 inline-flex text-white relative z-10 pl-9 pr-5 py-6 rounded-full bg-black hover:text-black hover:bg-white border hover:border-black transition w-fit justify-center align-middle mx-auto">
+            Explore the Platform
+            <ChevronRight className='ml-6 bg-white text-black border border-white rounded-full text-lg' />
+          </button>
 
-        <p className="mt-4 text-lg text-gray-300">
-          Leverage edge computing, large language models, and continuous learning to fuel the next generation of automation, security, and insight.
-        </p>
+         
       </motion.div>
 
       {/* Right Content */}
       <motion.div
-        className="w-full md:w-[25%] flex justify-center md:justify-end"
+        className="w-full md:w-1/2 flex flex-col justify-center md:justify-end"
         initial={{ opacity: 0, x: 50 }}
         whileInView={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.8, delay: 0.2 }}
         viewport={{ once: true, amount: 0.3 }}
       >
-        <button className="inline-flex bg-transparent border border-[var(--primary)]  text-white px-6 py-3 rounded-full font-semibold hover:bg-[var(--primary)] hover:text-black transition w-full justify-center align-middle mx-auto">
-          Explore the Platform
-        </button>
+        <h2 className="text-2xl lg:text-5xl font-normal leading-tight text-black relative z-10">
+          Bring every room together
+        </h2>
+        <p className="my-6 text-lg leading-relaxed text-black">
+          Leverage edge computing, large language models, and continuous learning to fuel the next generation of automation, security, and insight.
+        </p>
       </motion.div>
+      </div>
+      
     </section>
   );
 }

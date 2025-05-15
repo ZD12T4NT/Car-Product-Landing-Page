@@ -18,9 +18,8 @@ export default function ScrollBlur() {
 
   return (
     <div
-      className={`pointer-events-none fixed bottom-0 left-0 w-full h-20   backdrop-blur-md transition-opacity duration-300 z-50 ${
-        atBottom ? 'opacity-0' : 'opacity-100'
-      }`}
+      className={`pointer-events-none fixed bottom-0 left-0 w-full h-20 backdrop-blur-sm transition-opacity duration-300 z-50 ${atBottom ? 'opacity-0' : 'opacity-100'
+        }`}
     />
   );
 }

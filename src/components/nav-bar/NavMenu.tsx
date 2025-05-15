@@ -68,7 +68,7 @@ const NavMenu = () => {
     <>
       {/* Top Nav */}
       <div
-        className={`px-6 lg:px-0 fixed top-0 z-50 w-full transform transition-transform duration-300 ${
+        className={`px-6 fixed top-0 z-50 w-full transform transition-transform duration-300 ${
           showNav ? "translate-y-0" : "-translate-y-full"
         } ${lastScrollY > 50 ? "backdrop-blur-2xl shadow-md bg-white" : "bg-transparent"}`}
       >

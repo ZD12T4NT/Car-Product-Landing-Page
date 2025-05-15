@@ -31,7 +31,13 @@ const Hero = () => {
               >
           Our most recent breakthrough in audio devices blends exceptional audio performance with unparalleled toughness and elegance.
           </motion.p>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.8, duration: 0.8 }}
+            >
            <Button text="Buy now" variant="primary" href="/platform" />
+          </motion.div>
         </div>
       </div>
     </section>

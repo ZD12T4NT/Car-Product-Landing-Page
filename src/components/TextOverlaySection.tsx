@@ -5,9 +5,9 @@ import Image from 'next/image';
 
 export default function TextOverlaySection() {
   return (
-    <section className="relative z-10 text-center px-4 pt-0 md:pt-12 py-24 bg-white">
-      <div className="max-w-4xl mx-auto leading-relaxed">
-        <p className='text-black text-lg md:text-[34px]'>
+    <section className="relative z-10 text-center px-4 pt-0 md:py-12  bg-[#FAFAFA]">
+      <div className="max-w-4xl mx-auto leading-relaxed py-12">
+        <p className='text-black text-lg md:text-4xl'>
            Our latest innovation
           <Image
             src="/speakerImageText.png"
