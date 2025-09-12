@@ -80,7 +80,7 @@ const NavMenu = () => {
               src="/sonicLogo.svg"
               width={56}
               height={56}
-              alt="Barber Logo"
+              alt="Sonic Logo"
               className="transition-transform hover:scale-105"
             />
           </Link>
@@ -134,7 +134,7 @@ const NavMenu = () => {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ duration: 0.4, ease: "easeInOut" }}
-              className="fixed top-0 right-0 h-full w-3/4 z-40 p-6 text-white shadow-[0_0_40px_#7dee64] backdrop-blur-2xl"
+              className="fixed top-0 right-0 h-full w-full z-40 p-6 text-white  backdrop-blur-2xl"
             >
               <ul className="mt-24 space-y-6 font-light ">
                 {menuLinks.map((link) => (

@@ -22,7 +22,7 @@ const BurgerToggle: React.FC<Props> = ({ isOpen, toggle }) => {
 
   // Determine color based on scroll and open state
   const isAtTopAndOpen = isOpen && !scrolling;
-  const lineColor = isAtTopAndOpen ? "bg-white" : "bg-white";
+  const lineColor = isAtTopAndOpen ? "bg-white" : "bg-black";
   const lineClass = clsx("absolute h-0.5 w-6 transition-all", lineColor);
 
   return (
