@@ -1,20 +1,23 @@
 "use client";
 
 import Link from "next/link";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import BurgerToggle from "./BurgerToggle";
 import Button from "../Button";
-
+import { Search, ChevronDown } from "lucide-react";
 
 const NavMenu = () => {
-  const [scrolling, setScrolling] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
   const [showNav, setShowNav] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [selected, setSelected] = useState("All");
 
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  // Hide nav on scroll down
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
@@ -22,9 +25,9 @@ const NavMenu = () => {
       if (currentScrollY < 50) {
         setShowNav(true);
       } else if (currentScrollY > lastScrollY) {
-        setShowNav(false); // scrolling down
+        setShowNav(false);
       } else {
-        setShowNav(true); // scrolling up
+        setShowNav(true);
       }
 
       setLastScrollY(currentScrollY);
@@ -34,132 +37,149 @@ const NavMenu = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
 
+  // Close on outside click
   useEffect(() => {
-    if (mobileMenuOpen) {
-      document.body.classList.add("overflow-hidden");
-    } else {
-      document.body.classList.remove("overflow-hidden");
-    }
-  }, [mobileMenuOpen]);
-  
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setMobileMenuOpen(false);
+    const handleClickOutside = (event: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setMobileMenuOpen(false);
+        setDropdownOpen(false);
+      }
     };
-    if (mobileMenuOpen) {
-      window.addEventListener("keydown", handleKeyDown);
-    }
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      window.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [mobileMenuOpen]);
+  }, []);
 
-  const toggleMobileMenu = () => setMobileMenuOpen(prev => !prev);
+  const toggleMobileMenu = () => setMobileMenuOpen((prev) => !prev);
 
+  // Nav links
   const menuLinks = [
+    { name: "Home", href: "/" },
     { name: "About", href: "/about" },
-    { name: "Features", href: "/features" },
-    { name: "Products", href: "/products" },
+    { name: "Models", href: "/models" },
+    { name: "Blog", href: "/blog" },
     { name: "Contact", href: "/contact" },
   ];
 
+  // Dropdown items (dynamic)
+  const dropdownItems = [
+    { label: "All", value: "all" },
+    { label: "Cars", value: "cars" },
+    { label: "Models", value: "models" },
+    { label: "Blog", value: "blog" },
+  ];
+
+  const handleSelect = (item: { label: string; value: string }) => {
+    setSelected(item.label);
+    setDropdownOpen(false);
+    console.log("Selected:", item.value); // you can handle filter/search here
+  };
 
   return (
     <>
-      {/* Top Nav */}
+      {/* Top Nav (Logo + Burger) */}
       <div
-        className={`px-6 fixed top-0 z-50 w-full transform transition-transform duration-300 ${
+        className={` fixed top-0 z-50 w-full transform transition-transform duration-300 ${
           showNav ? "translate-y-0" : "-translate-y-full"
-        } ${lastScrollY > 50 ? "backdrop-blur-2xl shadow-md bg-white" : "bg-transparent"}`}
+        } ${
+          lastScrollY > 50
+            ? "backdrop-blur-2xl shadow-md bg-white"
+            : "bg-transparent"
+        }`}
       >
-
-        <div className="max-w-7xl mx-auto py-4 flex justify-between items-center ">
+        <div className="px-6 md:px-12 lg:px-20 py-8 flex justify-between items-center relative">
           {/* Logo */}
           <Link href="/">
-          <Image
+            <Image
               src="/sonicLogo.svg"
               width={56}
               height={56}
-              alt="Barber Logo"
+              alt="Logo"
               className="transition-transform hover:scale-105"
             />
           </Link>
 
-        <ul className="hidden md:flex space-x-6 text-sm font-bold tracking-wider uppercase">
-          {menuLinks.map((link) => (
-            <li key={link.href}>
-            <Link
-              href={link.href}
-              className="group relative inline-block text-black/70 transition-colors duration-200"
-            >
-              <span className="absolute bottom-0 left-1/2 w-0 h-[2px] bg-black/70 transition-all duration-300 group-hover:w-full group-hover:-translate-x-1/2" />
-              <span className="absolute bottom-0 right-1/2 w-0 h-[2px] bg-black/70 transition-all duration-300 group-hover:w-full group-hover:translate-x-1/2" />
-              {link.name}
-            </Link>
-            </li>
-          ))}
-        </ul>
+          <div className="flex items-center gap-4" ref={menuRef}>
+            {/* Dropdown + Search */}
+            <div className="flex items-center gap-3">
+              {/* Dropdown */}
+              <div className="relative hidden sm:block">
+                <button
+                  onClick={() => setDropdownOpen((prev) => !prev)}
+                  className="flex items-center gap-2 px-3 py-2 rounded-md border border-white/25 bg-white/5 text-white text-sm backdrop-blur-md hover:bg-white/10 transition"
+                >
+                  {selected}
+                  <ChevronDown
+                    className={`w-4 h-4 transition-transform ${
+                      dropdownOpen ? "rotate-180" : ""
+                    }`}
+                  />
+                </button>
 
+                {dropdownOpen && (
+                  <ul className="absolute mt-2 w-40 rounded-md bg-white/10 backdrop-blur-md border border-white/20 shadow-lg z-50">
+                    {dropdownItems.map((item) => (
+                      <li
+                        key={item.value}
+                        onClick={() => handleSelect(item)}
+                        className="px-4 py-2 text-sm text-white hover:bg-white/20 cursor-pointer"
+                      >
+                        {item.label}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
 
+              {/* Search Bar */}
+              <div className="relative hidden sm:block">
+                <input
+                  type="text"
+                  placeholder="Search..."
+                  className="rounded-md px-4 py-2 text-sm border border-white/25 bg-white/5 text-white placeholder-white/70 backdrop-blur-md focus:outline-none focus:ring-2 focus:ring-[var(--primary)]"
+                />
+                <Search className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white" />
+              </div>
+            </div>
 
-        {/* Log In Buttons */}
-        <ul className="hidden md:flex space-x-6  tracking-wider uppercase">
-            <li>
-           <Button text="Buy now" variant="secondary" href="/platform" />
-            </li>
-        </ul>
+            {/* Burger Menu */}
+            <div className="relative">
+              <BurgerToggle isOpen={mobileMenuOpen} toggle={toggleMobileMenu} />
 
-          {/* Mobile Menu Icon */}
-          <BurgerToggle isOpen={mobileMenuOpen} toggle={toggleMobileMenu} />
+              {/* Dropdown Menu */}
+              <AnimatePresence>
+                {mobileMenuOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.2 }}
+                    className="absolute right-0 mt-3 w-64 rounded-xl bg-white/5 backdrop-blur-md shadow-lg border border-white/20 p-4 space-y-4"
+                  >
+                    <ul className="space-y-3">
+                      {menuLinks.map((link) => (
+                        <li key={link.href}>
+                          <Link
+                            href={link.href}
+                            onClick={() => setMobileMenuOpen(false)}
+                            className="transition block text-lg font-medium text-white hover:text-white/50"
+                          >
+                            {link.name}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+
+                    {/* CTA Button */}
+                    <Button text="Book Now" variant="primary" href="/" />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          </div>
         </div>
       </div>
-
-     {/* Mobile Drawer */}
-      <AnimatePresence>
-        {mobileMenuOpen && (
-          <>
-            {/* Background blur overlay */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="fixed inset-0 z-30 backdrop-blur-lg bg-black/70"
-              onClick={() => setMobileMenuOpen(false)}
-            />
-
-            {/* Mobile nav drawer */}
-            <motion.div
-              initial={{ x: "100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "100%" }}
-              transition={{ duration: 0.4, ease: "easeInOut" }}
-              className="fixed top-0 right-0 h-full w-3/4 z-40 p-6 text-white shadow-[0_0_40px_#7dee64] backdrop-blur-2xl"
-            >
-              <ul className="mt-24 space-y-6 font-light ">
-                {menuLinks.map((link) => (
-                  <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="group relative block py-2 transition duration-300"
-                    >
-                      <span className="text-3xl relative z-10 text-white group-hover:text-[var(--primary)] transition-colors">
-                        {link.name}
-                      </span>
-
-                      {/* Animated bottom border */}
-                      <span className="absolute bottom-0 left-0 h-[2px] w-0 bg-[var(--primary)] transition-all duration-300 group-hover:w-full" />
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-
-             
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
     </>
   );
 };

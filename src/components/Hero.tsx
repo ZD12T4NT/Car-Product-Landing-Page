@@ -1,43 +1,70 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { motion } from 'framer-motion';
-import Button from './Button';
+import Image from "next/image";
+import React from "react";
+import { motion } from "framer-motion";
 
-const Hero = () => {
+type HeroProps = {
+  backgroundImage: string;
+  location?: string;
+  tagline?: string;
+  rightText?: string;
+  category?: string;
+  title: string;
+};
+
+const Hero: React.FC<HeroProps> = ({
+  backgroundImage,
+  location = "Dubai, UAE",
+  tagline = "Prime Collection by Rydex!",
+  rightText = "Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet nunc ut.",
+  category = "Car Rental",
+  title,
+}) => {
   return (
-    <section className="relative overflow-hidden ">
-  
-      {/* Content Wrapper */}
-      <div className="relative z-10 min-h-screen md:min-h-[60vh] pt-12 md:pt-40 flex items-center justify-center px-6 max-w-7xl mx-auto">
-        <div className="max-w-7xl text-center flex flex-col items-center">
-      
-          {/* Main Heading */}
-          <motion.h1
-            className="text-5xl md:text-6xl xl:text-8xl text-black mb-4 leading-tight font-normal"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.8 }}
-          >
-              Immersive Sound, Simplified
-          </motion.h1>
+    <section className="relative h-screen w-full overflow-hidden rounded-xl">
+      {/* Background image */}
+      <div className="absolute inset-0 -z-10">
+        <Image
+          src={backgroundImage}
+          alt="Hero Background"
+          fill
+          priority
+          className="object-cover"
+        />
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-black/50" />
+      </div>
 
-          {/* Paragraph */}
-          <motion.p
-            className="text-lg text-black max-w-xl mb-6"
-            initial={{ opacity: 0, y: 10 }}
+      {/* Content */}
+      <div className="relative z-10 w-full h-full px-6 md:px-12 lg:px-20 flex flex-col justify-between pt-[120px] pb-12">
+        {/* Top row */}
+        <div className="flex justify-between text-white/80 text-sm md:text-base">
+          <div className="flex items-center gap-4">
+            <span>{location}</span>
+            <span className="w-40 h-[1px] bg-white/50" />
+            <span className="md:w-44">{tagline}</span>
+          </div>
+          <div className="max-w-sm text-right">{rightText}</div>
+        </div>
+
+        {/* Bottom content */}
+        <div className="flex items-start">
+          {/* Category */}
+          <div className="flex items-center gap-2 text-[#d4d414] font-semibold uppercase tracking-wide text-sm md:text-base mb-4 mr-10">
+            <span className="w-6 h-[3px] bg-[#d4d414]" />
+            {category}
+          </div>
+
+          {/* Title */}
+          <motion.h1
+            initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 0.8 }}
-              >
-          Our most recent breakthrough in audio devices blends exceptional audio performance with unparalleled toughness and elegance.
-          </motion.p>
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.8, duration: 0.8 }}
-            >
-           <Button text="Buy now" variant="primary" href="/platform" />
-          </motion.div>
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="text-4xl md:text-6xl lg:text-7xl font-medium leading-tight text-white max-w-3xl"
+          >
+            {title}
+          </motion.h1>
         </div>
       </div>
     </section>

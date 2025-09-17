@@ -2,8 +2,8 @@ import NavMenu from '@/components/nav-bar/NavMenu'
 import './globals.css'
 import { Sora, Inter } from 'next/font/google'
 import Footer from '@/components/Footer'
-import ScrollBlur from '@/components/ScrollBlur'
 import { Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
+import CustomCursor from '@/components/Cursor';
 
 const sora = Sora({ subsets: ['latin'], weight: ['400', '700'] })
 const inter = Inter({ subsets: ['latin'], weight: ['100', '400', '700'] })
@@ -52,12 +52,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`overflow-x-hidden ${sora.className} ${inter.className}`}
+        className={`overflow-x-hidden m-5 bg-black ${sora.className} ${inter.className}`}
       >
         <NavMenu />
+        <CustomCursor />
         {children}
         <Footer {...footerData} />
-        <ScrollBlur />
       </body>
     </html>
   )

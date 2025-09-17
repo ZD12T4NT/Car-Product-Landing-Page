@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import clsx from "clsx";
 
@@ -10,26 +10,15 @@ type Props = {
 };
 
 const BurgerToggle: React.FC<Props> = ({ isOpen, toggle }) => {
-  const [scrolling, setScrolling] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolling(window.scrollY > 50);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  // Determine color based on scroll and open state
-  const isAtTopAndOpen = isOpen && !scrolling;
-  const lineColor = isAtTopAndOpen ? "bg-white" : "bg-white";
-  const lineClass = clsx("absolute h-0.5 w-6 transition-all", lineColor);
+  const lineClass = clsx(
+    "absolute h-0.5 w-6 bg-white transition-all rounded"
+  );
 
   return (
     <button
       onClick={toggle}
       aria-label="Toggle menu"
-      className="relative md:hidden w-6 h-4 flex items-center justify-center focus:outline-none"
+      className="relative w-10 h-10 flex items-center justify-center focus:outline-none bg-white/5 rounded-md border border-white/25"
     >
       {/* Top line */}
       <motion.span
@@ -37,9 +26,9 @@ const BurgerToggle: React.FC<Props> = ({ isOpen, toggle }) => {
         initial={false}
         animate={{
           rotate: isOpen ? 45 : 0,
-          top: isOpen ? "50%" : "0%",
+          y: isOpen ? 0 : -8,
         }}
-        transition={{ duration: 0.3 }}
+        transition={{ duration: 0.3, ease: "easeInOut" }}
       />
 
       {/* Middle line */}
@@ -48,9 +37,9 @@ const BurgerToggle: React.FC<Props> = ({ isOpen, toggle }) => {
         initial={false}
         animate={{
           opacity: isOpen ? 0 : 1,
+          y: 0, // always centered
         }}
-        transition={{ duration: 0.3 }}
-        style={{ top: "50%" }}
+        transition={{ duration: 0.2 }}
       />
 
       {/* Bottom line */}
@@ -59,9 +48,9 @@ const BurgerToggle: React.FC<Props> = ({ isOpen, toggle }) => {
         initial={false}
         animate={{
           rotate: isOpen ? -45 : 0,
-          top: isOpen ? "50%" : "100%",
+          y: isOpen ? 0 : 8,
         }}
-        transition={{ duration: 0.3 }}
+        transition={{ duration: 0.3, ease: "easeInOut" }}
       />
     </button>
   );

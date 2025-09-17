@@ -4,22 +4,20 @@ import { motion } from "framer-motion";
 
 type SplitSectionProps = {
   pretitle?: string;
-  icon?: React.ReactNode;
   title: string;
   description: string;
 };
 
 export default function SplitSection({
-  pretitle = "Why Us?",
-  icon,
+  pretitle = "Our Models",
   title,
   description,
 }: SplitSectionProps) {
   return (
-    <section className=" py-10 md:py-16 bg-white relative z-10">
+    <section className="px-6 md:px-12 lg:px-20 bg-black relative z-10">
       {/* Left Side */}
 
-      <div className="flex justify-center gap-8 items-end lg:justify-between flex-col lg:flex-row w-full max-w-7xl mx-auto px-6 ">
+      <div className="flex justify-center gap-8 items-end lg:justify-between flex-col lg:flex-row w-full ">
       <motion.div
         className="w-full lg:w-1/2 text-black"
         initial={{ opacity: 0, x: -50 }}
@@ -27,31 +25,25 @@ export default function SplitSection({
         transition={{ duration: 0.8, ease: "easeOut" }}
         viewport={{ once: true, amount: 0.3 }}
       >
-        <motion.span
-          className="align-middle flex text-sm tracking-widest text-black uppercase mb-2 border border-black/30 px-6 py-3 rounded-full w-fit"
-          initial={{ opacity: 0, y: -10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.6 }}
-          viewport={{ once: true }}
-        >
-          {icon && <span className="mr-2">{icon}</span>}
-          {pretitle}
-        </motion.span>
+         <div className="flex items-center gap-2 text-[#d4d414] font-semibold uppercase tracking-wide text-sm md:text-base mb-4 mr-10">
+            <span className="w-6 h-[3px] bg-[#d4d414]" />
+            {pretitle}
+          </div>
 
-        <h2 className="text-3xl lg:text-5xl font-normal text-black mt-7">
+        <h2 className="text-3xl lg:text-5xl font-normal text-white mt-7">
           {title}
         </h2>
       </motion.div>
 
       {/* Right Side */}
       <motion.div
-        className="w-full lg:w-1/2 text-black"
+        className="w-full lg:w-1/2 text-white/50"
         initial={{ opacity: 0, x: 50 }}
         whileInView={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
         viewport={{ once: true, amount: 0.3 }}
       >
-        <p className="mb-6 md:mb-0 text-lg leading-relaxed text-black">
+        <p className="mb-6 md:mb-0 text-lg leading-relaxed text-white/50">
           {description}
         </p>
       </motion.div>
