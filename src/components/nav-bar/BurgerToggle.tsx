@@ -10,9 +10,26 @@ type Props = {
 };
 
 const BurgerToggle: React.FC<Props> = ({ isOpen, toggle }) => {
+<<<<<<< HEAD
   const lineClass = clsx(
     "absolute h-0.5 w-6 bg-white transition-all rounded"
   );
+=======
+  const [scrolling, setScrolling] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolling(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Determine color based on scroll and open state
+  const isAtTopAndOpen = isOpen && !scrolling;
+  const lineColor = isAtTopAndOpen ? "bg-white" : "bg-black";
+  const lineClass = clsx("absolute h-0.5 w-6 transition-all", lineColor);
+>>>>>>> 49d3606272ddd6e31177b6c4f38b69331572a644
 
   return (
     <button
