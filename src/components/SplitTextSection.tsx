@@ -25,12 +25,12 @@ export default function SplitSection({
         transition={{ duration: 0.8, ease: "easeOut" }}
         viewport={{ once: true, amount: 0.3 }}
       >
-         <div className="flex items-center gap-2 text-[#d4d414] font-semibold uppercase tracking-wide text-sm md:text-base mb-4 mr-10">
+         <div className="flex items-center gap-2 text-[#d4d414] font-normal uppercase tracking-wide text-base mb-1 md:mb-4 mr-10">
             <span className="w-6 h-[3px] bg-[#d4d414]" />
             {pretitle}
           </div>
 
-        <h2 className="text-3xl lg:text-5xl font-normal text-white mt-7">
+        <h2 className="text-3xl lg:text-5xl font-normal text-white mt-3 md:mt-7">
           {title}
         </h2>
       </motion.div>
@@ -43,7 +43,7 @@ export default function SplitSection({
         transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
         viewport={{ once: true, amount: 0.3 }}
       >
-        <p className="mb-6 md:mb-0 text-lg leading-relaxed text-white/50">
+        <p className="mb-0 text-lg leading-relaxed text-white/50">
           {description}
         </p>
       </motion.div>

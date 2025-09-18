@@ -1,28 +1,21 @@
 'use client';
 
-import { Paperclip } from 'lucide-react';
-import Image from 'next/image';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 const posts = [
-  {
-    title: 'Immersive Audio for the Next Gen',
-    image: '/speakerBlogImage.jpeg',
-  },
-  {
-    title: 'Engineering Minimal Interfaces',
-    image: '/speakerBlogImageTwo.jpeg',
-  },
-  {
-    title: 'Why Hardware Design Needs Emotion',
-    image: '/speakerBlogImageThree.jpeg',
-  },
+  { title: 'Guide To Choose The Right Car In A Showroom', image: '/blogOne.webp',postType:'Guides' },
+  { title: 'Rydex hosts annual auto racing grand events', image: '/blogTwo.webp',postType:'Events' },
+  { title: 'Guides for mantaining your rental car perfectly', image: '/blogThree.webp', postType:'Guides' },
 ];
 
 export default function BlogSection() {
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
   return (
     <section className="w-full bg-black relative z-10">
-      <div className=" sm:py-32 px-6 md:px-12 lg:px-20 py-16 ">
+      <div className="sm:py-32 px-6 md:px-12 lg:px-20 py-16">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -31,45 +24,51 @@ export default function BlogSection() {
           viewport={{ once: true, amount: 0.2 }}
           className="flex flex-col items-center text-center mb-12 gap-6"
         >
-            <div className="flex text-center items-center gap-2 text-[#d4d414] font-semibold uppercase tracking-wide text-sm md:text-base ">
+          <div className="flex text-center items-center gap-2 text-[#d4d414] font-normal uppercase tracking-wide text-base">
             <span className="w-6 h-[3px] bg-[#d4d414]" />
-            Insights
+            Blog posts
           </div>
-            <h2 className="text-3xl lg:text-5xl font-normal text-white mt-2">Our Latest Blog Posts</h2>
-        
+          <h2 className="text-3xl lg:text-5xl font-normal text-white mt-2">
+            Engage with Premium Rental Posts
+          </h2>
         </motion.div>
 
         {/* Blog Cards */}
-        <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-1"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.1 }}
-          transition={{ staggerChildren: 0.2 }}
-        >
-          {posts.map((post, index) => (
-            <motion.div
-              key={index}
-              className="group"
-              variants={{
-                hidden: { opacity: 0, y: 40 },
-                visible: { opacity: 1, y: 0 },
-              }}
-              transition={{ duration: 0.6, ease: 'easeOut' }}
-            >
-              <div className="relative w-full h-80 overflow-hidden rounded-3xl">
+      <div className="relative flex flex-col md:flex-row flex-wrap gap-2 h-screen md:h-[400px]">
+          {/* Blog posts */}
+          {posts.map((post, index) => {
+            const isHovered = hoveredIndex === index;
+
+            return (
+              <motion.div
+                key={index}
+                onMouseEnter={() => setHoveredIndex(index)}
+                onMouseLeave={() => setHoveredIndex(null)}
+                animate={{
+                  flex: isHovered ? 2 : hoveredIndex === null ? 1 : 1.4,
+                }}
+                transition={{ duration: 0.5, ease: 'easeOut' }}
+                className="relative rounded-3xl overflow-hidden cursor-pointer flex"
+              >
                 <Image
                   src={post.image}
                   alt={post.title}
                   fill
-                  className="object-cover object-center group-hover:scale-105 transition-transform duration-500 relative"
+                  className="object-cover object-center transition-transform duration-500"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent" />
-                <h3 className="z-10 absolute bottom-2 left-2 text-2xl lg:text-3xl font-normal text-white my-5">{post.title}</h3>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
+
+                <div className="absolute top-2 right-2 p-1 pr-5 pl-5 bg-[#d4d414] rounded-full text-black text-lg">{post.postType}</div>
+                <h3 className="absolute bottom-4 left-4 text-xl lg:text-[24px] font-medium text-white z-30 capitalize max-w-[70%] text-left">
+                  {post.title}
+                </h3>
+              </motion.div>
+            );
+          })}
+
+          {/* Bottom fade */}
+          <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-black via-black/60 to-transparent pointer-events-none z-20" />
+        </div>
+
       </div>
     </section>
   );

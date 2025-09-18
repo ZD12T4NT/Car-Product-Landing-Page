@@ -45,7 +45,7 @@ export default function CustomCursor() {
         damping: 20,
       }}
     >
-      <div className="w-8 h-8 rounded-full bg-[#d4d414] opacity-80 mix-blend-difference" />
+      <div className="w-5 h-5 rounded-full bg-[#d4d414] opacity-80 mix-blend-difference" />
     </motion.div>
   );
 }

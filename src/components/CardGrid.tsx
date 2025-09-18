@@ -15,7 +15,7 @@ const cardData = [
     icon: (
       <Cpu
         size={40}
-        className="text-[#d4d414] border border-[#d4d414] rounded-full p-2"
+        className="text-[#d4d414] border border-[#d4d414] rounded-full h-14 w-14 p-3"
       />
     ),
     title: 'AI Processing',
@@ -25,7 +25,7 @@ const cardData = [
     icon: (
       <ShieldCheck
         size={40}
-        className="text-[#d4d414] border border-[#d4d414] rounded-full p-2"
+        className="text-[#d4d414] border border-[#d4d414] rounded-full h-14 w-14 p-3"
       />
     ),
     title: 'Secure Cloud',
@@ -35,7 +35,7 @@ const cardData = [
     icon: (
       <BarChart3
         size={40}
-        className="text-[#d4d414] border border-[#d4d414] rounded-full p-2"
+        className="text-[#d4d414] border border-[#d4d414] rounded-full h-14 w-14 p-3"
       />
     ),
     title: 'Live Insights',
@@ -45,7 +45,7 @@ const cardData = [
     icon: (
       <BarChart3
         size={40}
-        className="text-[#d4d414] border border-[#d4d414] rounded-full p-2"
+        className="text-[#d4d414] border border-[#d4d414] rounded-full h-14 w-14 p-3"
       />
     ),
     title: 'Live Insights',
@@ -56,27 +56,26 @@ const cardData = [
 
 export default function CardGrid() {
   return (
-    <section className="w-full px-6 bg-black relative z-10 py-10">
-      <div className="max-w-7xl mx-auto ">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 items-start -mx-4">
+    <section className="w-full bg-black relative z-10 py-10 px-6 md:px-12 lg:px-20">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 items-start">
              <motion.div
                     initial={{ opacity: 0, x: -50 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.8, ease: "easeOut" }}
                     viewport={{ once: true, amount: 0.3 }}
                   >
-                    <h2 className="flex items-center gap-3 text-[#d4d414] font-semibold uppercase tracking-wide text-sm">
+                    <h2 className="flex items-center gap-3 text-[#d4d414] font-medium uppercase tracking-wide text-base">
                       <span className="w-6 h-[3px] bg-[#d4d414]" />
                       why choose us?
                     </h2>
-                    <h1 className="text-white text-[46px]">
+                    <h1 className="text-white text-[28px] md:text-[46px]">
                       Exceptional Service in Every Mile, Every Time
                     </h1>
                   </motion.div>
           {cardData.map((card, index) => (
             <motion.div
               key={index}
-              className="w-full h-full"
+              className="w-full h-full min-h-[280px]"
               whileInView={{ opacity: 1, y: 0 }}
               initial={{ opacity: 0, y: 50 }}
               transition={{
@@ -87,19 +86,20 @@ export default function CardGrid() {
               }}
               viewport={{ once: true }}
             >
-              <div className="bg-[#1a1a1a] backdrop-blur-sm transition duration-300 ease-in-out rounded-2xl p-6 h-full flex flex-col">
+              <div className="bg-[#1a1a1a] backdrop-blur-sm transition duration-300 ease-in-out rounded-2xl p-4 h-full flex flex-col justify-between">
                 <div className="mb-4">{card.icon}</div>
-                <h4 className="text-white text-base md:text-xl font-normal mb-2 tracking-wide">
+               <div className="flex flex-col">
+                 <h4 className="text-white text-xl font-normal mb-2 tracking-wide">
                   {card.title}
                 </h4>
-                <p className="text-white/50 text-sm leading-relaxed">
+                <p className="text-white/50 text-base leading-relaxed">
                   {card.description}
                 </p>
+               </div>
               </div>
             </motion.div>
           ))}
         </div>
-      </div>
     </section>
   );
 }

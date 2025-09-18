@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring  } from "framer-motion";
 import { useRef } from "react";
 
 type Card = {
@@ -34,32 +34,36 @@ export default function ParallaxCards() {
   return (
     <div
       ref={containerRef}
-      className="relative h-[400vh] w-full bg-black px-6 md:px-12 lg:px-20"
+      className="relative h-[300vh] md:h-[400vh] w-full bg-black px-6 md:px-12 lg:px-20"
     >
       <div className="sticky top-0 h-screen flex items-center justify-center">
         {cards.map((card, index) => {
-          let y, opacity, scale;
+       let y, opacity, scale;
 
           if (index === 0) {
-            // First card always visible
             y = "0%";
             opacity = 1;
             scale = 1;
           } else {
-            const start = index / cards.length;
-            const end = (index + 1) / cards.length;
+            const start = index / (cards.length + 1);
+            const end = (index + 1) / (cards.length + 1);
 
-            y = useTransform(scrollYProgress, [start, end], ["100%", "0%"]);
-            opacity = useTransform(scrollYProgress, [start, end], [0, 1]);
-            scale = useTransform(scrollYProgress, [start, end], [0.95, 1]);
+            const rawY = useTransform(scrollYProgress, [start, end], ["500%", "0%"]);
+            y = useSpring(rawY, { stiffness: 100, damping: 25 });
+
+            const rawOpacity = useTransform(scrollYProgress, [start, end], [0, 1]);
+            opacity = useSpring(rawOpacity, { stiffness: 100, damping: 25 });
+
+            const rawScale = useTransform(scrollYProgress, [start, end], [0.95, 1]);
+            scale = useSpring(rawScale, { stiffness: 120, damping: 20 });
           }
 
           return (
             <motion.div
-              key={card.id}
-              style={{ y, opacity, scale, zIndex: index }}
-              className="absolute h-[70vh] flex items-center justify-center rounded-3xl shadow-2xl w-full "
-            >
+                key={card.id}
+                style={{ y, opacity, scale, zIndex: index }}
+                className="absolute h-[70vh] flex items-center justify-center rounded-3xl shadow-2xl w-full"
+              >
               <div
                 className="relative w-full h-full rounded-3xl bg-cover bg-center bg-no-repeat flex flex-col items-start text-white p-10 justify-between overflow-hidden"
                 style={{ backgroundImage: `url(${card.image})` }}
@@ -67,15 +71,15 @@ export default function ParallaxCards() {
                 {/* Overlay */}
                 <div className="absolute inset-0 bg-black/50" />
 
-                <p className="text-lg drop-shadow-lg relative z-10">
+                <p className="text-[22px] drop-shadow-lg relative z-10">
                   {card.description}
                 </p>
 
-                <h2 className="text-4xl font-bold mb-4 drop-shadow-lg relative z-10">
+                <h2 className="text-[42px] font-light mb-4 drop-shadow-lg relative z-10">
                   {card.title}
                 </h2>
 
-                <dl className="grid grid-cols-2 gap-x-8 gap-y-12 lg:grid-cols-4 relative z-10">
+                <dl className="hidden md:grid grid-cols-2 gap-x-8 gap-y-12 lg:grid-cols-4 relative z-10">
                   {stats.map((stat) => (
                     <div key={stat.id} className="flex flex-col items-start">
                       <dd className="text-4xl md:text-2xl font-semibold text-white">

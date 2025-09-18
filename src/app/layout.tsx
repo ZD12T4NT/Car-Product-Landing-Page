@@ -1,12 +1,12 @@
 import NavMenu from '@/components/nav-bar/NavMenu'
 import './globals.css'
-import { Sora, Inter } from 'next/font/google'
+import { Figtree } from 'next/font/google'
 import Footer from '@/components/Footer'
 import { Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
 import CustomCursor from '@/components/Cursor';
 
-const sora = Sora({ subsets: ['latin'], weight: ['400', '700'] })
-const inter = Inter({ subsets: ['latin'], weight: ['100', '400', '700'] })
+const figtree = Figtree({ subsets: ['latin'], weight: ['400', '700'] })
+
 
 export const metadata = {
   title: "Immersive Sound | Simplified",
@@ -16,25 +16,38 @@ export const metadata = {
 
 
 const footerData = {
-  footerText: 'The Perfect Sound, Anywhere',
+  footerText: 'Rydex',
   imageSrc: '/sonicFooter.svg',
   linkGroups: [
     {
-      title: 'Company',
+      title: 'Main Pages',
       links: [
-        { label: 'About Us', href: '#' },
-        { label: 'Careers', href: '#' },
-        { label: 'Press', href: '#' },
+        { label: 'Home', href: '/' },
+        { label: 'About', href: '#' },
+        { label: 'Models', href: '#' },
         { label: 'Blog', href: '#' },
+        { label: 'Contact', href: '#' },
       ],
     },
     {
-      title: 'Product',
+      title: 'Follow Us',
       links: [
-        { label: 'Features', href: '#' },
-        { label: 'Integrations', href: '#' },
-        { label: 'Pricing', href: '#' },
-        { label: 'API', href: '#' },
+        { label: 'Instagram', href: '#' },
+        { label: 'Twitter (X)', href: '#' },
+        { label: 'Youtube', href: '#' },
+      ],
+    },
+     {
+      title: 'Visit Us',
+      links: [
+        { label: '19 Jumeirah Beach Road, Umm Suqeim, UAE.', href: '#' },
+      ],
+    },
+     {
+      title: 'Contact Us',
+      links: [
+        { label: '+1 (123) 456-7890', href: '#' },
+        { label: 'info@rydex.com', href: '#' },
       ],
     },
   ],
@@ -52,7 +65,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`overflow-x-hidden m-5 bg-black ${sora.className} ${inter.className}`}
+        className={`overflow-x-hidden bg-black ${figtree.className} `}
       >
         <NavMenu />
         <CustomCursor />

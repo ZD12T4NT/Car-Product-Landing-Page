@@ -80,29 +80,23 @@ const NavMenu = () => {
     <>
       {/* Top Nav (Logo + Burger) */}
       <div
-        className={` fixed top-0 z-50 w-full transform transition-transform duration-300 ${
+        className={`fixed top-0 z-50 w-full transform transition-transform duration-300 ${
           showNav ? "translate-y-0" : "-translate-y-full"
         } ${
           lastScrollY > 50
-            ? "backdrop-blur-2xl shadow-md bg-white"
+            ? "backdrop-blur-2xl shadow-md bg-transparent"
             : "bg-transparent"
         }`}
       >
-        <div className="px-6 md:px-12 lg:px-20 py-8 flex justify-between items-center relative">
+        <div className="pl-10 px-12 md:pl-14 lg:pl-20  md:px-14 lg:px-20 py-8 flex justify-between items-center relative">
           {/* Logo */}
-          <Link href="/">
-            <Image
-              src="/sonicLogo.svg"
-              width={56}
-              height={56}
-              alt="Logo"
-              className="transition-transform hover:scale-105"
-            />
+          <Link className="text-3xl text-white" href="/">
+          Rydex
           </Link>
 
           <div className="flex items-center gap-4" ref={menuRef}>
             {/* Dropdown + Search */}
-            <div className="flex items-center gap-3">
+            <div className="hidden md:flex items-center gap-3">
               {/* Dropdown */}
               <div className="relative hidden sm:block">
                 <button
@@ -148,34 +142,42 @@ const NavMenu = () => {
               <BurgerToggle isOpen={mobileMenuOpen} toggle={toggleMobileMenu} />
 
               {/* Dropdown Menu */}
-              <AnimatePresence>
-                {mobileMenuOpen && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.2 }}
-                    className="absolute right-0 mt-3 w-64 rounded-xl bg-white/5 backdrop-blur-md shadow-lg border border-white/20 p-4 space-y-4"
-                  >
-                    <ul className="space-y-3">
-                      {menuLinks.map((link) => (
-                        <li key={link.href}>
-                          <Link
-                            href={link.href}
-                            onClick={() => setMobileMenuOpen(false)}
-                            className="transition block text-lg font-medium text-white hover:text-white/50"
-                          >
-                            {link.name}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
+                <AnimatePresence>
+                  {mobileMenuOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      transition={{ duration: 0.2 }}
+                      className="fixed top-20 right-11 md:right-6 w-64 rounded-xl bg-white/10 backdrop-blur-md shadow-lg border border-white/20 p-4 space-y-4 z-[60]"
+                    >
+                      <ul className="space-y-3">
+                        {menuLinks.map((link, index) => (
+                          <li key={index} className="overflow-hidden">
+                            <Link
+                              href={link.href}
+                              onClick={() => setMobileMenuOpen(false)}
+                              className="group relative block text-lg font-medium text-white"
+                            >
+                              {/* Normal text */}
+                              <span className="block transition-transform duration-300 group-hover:-translate-y-full">
+                                {link.name}
+                              </span>
 
-                    {/* CTA Button */}
-                    <Button text="Book Now" variant="primary" href="/" />
-                  </motion.div>
-                )}
-              </AnimatePresence>
+                              {/* Hover text (clone underneath) */}
+                              <span className="absolute left-0 top-full block transition-transform duration-300 group-hover:-translate-y-full">
+                                {link.name}
+                              </span>
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+
+                      {/* CTA Button */}
+                      <Button text="Book Now" variant="primary" href="/" />
+                    </motion.div>
+                  )}
+                </AnimatePresence>
             </div>
           </div>
         </div>
