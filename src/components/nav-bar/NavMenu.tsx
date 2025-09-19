@@ -89,21 +89,16 @@ const NavMenu = () => {
         }`}
       >
         <div className="pl-10 px-12 md:pl-14 lg:pl-20  md:px-14 lg:px-20 py-8 flex justify-between items-center relative">
-          {/* Logo */}
-<<<<<<< HEAD
-          <Link className="text-3xl text-white" href="/">
-          Rydex
-=======
-          <Link href="/">
-          <Image
-              src="/sonicLogo.svg"
-              width={56}
-              height={56}
-              alt="Sonic Logo"
-              className="transition-transform hover:scale-105"
-            />
->>>>>>> 49d3606272ddd6e31177b6c4f38b69331572a644
-          </Link>
+{/* Logo */}
+<Link href="/">
+  <Image
+    src="/sonicLogo.svg"
+    width={56}
+    height={56}
+    alt="Sonic Logo"
+    className="transition-transform hover:scale-105"
+  />
+</Link>
 
           <div className="flex items-center gap-4" ref={menuRef}>
             {/* Dropdown + Search */}
@@ -193,10 +188,7 @@ const NavMenu = () => {
           </div>
         </div>
       </div>
-<<<<<<< HEAD
-=======
-
-     {/* Mobile Drawer */}
+      {/* Mobile Drawer */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <>
@@ -236,13 +228,10 @@ const NavMenu = () => {
                   </li>
                 ))}
               </ul>
-
-             
             </motion.div>
           </>
         )}
       </AnimatePresence>
->>>>>>> 49d3606272ddd6e31177b6c4f38b69331572a644
     </>
   );
 };
