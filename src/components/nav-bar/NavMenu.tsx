@@ -89,16 +89,10 @@ const NavMenu = () => {
         }`}
       >
         <div className="pl-10 px-12 md:pl-14 lg:pl-20  md:px-14 lg:px-20 py-8 flex justify-between items-center relative">
-{/* Logo */}
-<Link href="/">
-  <Image
-    src="/sonicLogo.svg"
-    width={56}
-    height={56}
-    alt="Sonic Logo"
-    className="transition-transform hover:scale-105"
-  />
-</Link>
+                {/* Logo */}
+                <Link href="/" className="text-2xl md:text-3xl text-white">
+                 Rydex
+                </Link>
 
           <div className="flex items-center gap-4" ref={menuRef}>
             {/* Dropdown + Search */}
@@ -188,50 +182,7 @@ const NavMenu = () => {
           </div>
         </div>
       </div>
-      {/* Mobile Drawer */}
-      <AnimatePresence>
-        {mobileMenuOpen && (
-          <>
-            {/* Background blur overlay */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="fixed inset-0 z-30 backdrop-blur-lg bg-black/70"
-              onClick={() => setMobileMenuOpen(false)}
-            />
-
-            {/* Mobile nav drawer */}
-            <motion.div
-              initial={{ x: "100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "100%" }}
-              transition={{ duration: 0.4, ease: "easeInOut" }}
-              className="fixed top-0 right-0 h-full w-full z-40 p-6 text-white  backdrop-blur-2xl"
-            >
-              <ul className="mt-24 space-y-6 font-light ">
-                {menuLinks.map((link) => (
-                  <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="group relative block py-2 transition duration-300"
-                    >
-                      <span className="text-3xl relative z-10 text-white group-hover:text-[var(--primary)] transition-colors">
-                        {link.name}
-                      </span>
-
-                      {/* Animated bottom border */}
-                      <span className="absolute bottom-0 left-0 h-[2px] w-0 bg-[var(--primary)] transition-all duration-300 group-hover:w-full" />
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
+  
     </>
   );
 };
