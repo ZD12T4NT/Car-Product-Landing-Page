@@ -1,4 +1,4 @@
-import FadeOnResize from '@/components/FadeOnResize';
+
 import Hero from '../components/Hero';
 import CardGrid from '@/components/CardGrid';
 import BlogSection from '@/components/BlogSection';
