@@ -10,7 +10,6 @@ import HowItWorks from '@/components/ProgressComponent';
 
 export default function SonicLandingPage() {
   return (
-    <FadeOnResize>
       <main className="min-h-screen">
         <Hero
           backgroundImage="/porsche.webp"
@@ -45,6 +44,5 @@ export default function SonicLandingPage() {
 
         <BlogSection />
       </main>
-    </FadeOnResize>
   );
 }
